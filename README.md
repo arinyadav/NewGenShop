@@ -1,3 +1,3 @@
-# AMAZON
+# NewGen Shop
 
-A flutter project which is a amazon clone with admin panel 
+A flutter project which is a Shopping APP with admin panel 
