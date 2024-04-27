@@ -12,6 +12,7 @@ class _AdminScreenState extends State<AdminScreen> {
     int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
+ // static const String routeName = '/admin';
 
   List<Widget> pages = [
     const Center(child: Text("Analytics Page")),

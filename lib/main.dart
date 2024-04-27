@@ -5,7 +5,7 @@ import 'package:amazon/features/auth/screens/auth_screen.dart';
 import 'package:amazon/features/auth/services/auth_service.dart';
 import 'package:amazon/features/home/screens/home_screen.dart';
 import 'package:amazon/providers/user_provider.dart';
-import 'package:amazon/router.dart';
+import 'package:amazon/router.dart';                        
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -60,6 +60,22 @@ class _MyAppState extends State<MyApp> {
               ? const BottomBar()
               : const AdminScreen()
           : const AuthScreen(),
+
+    //       home: Consumer<UserProvider>(
+    //     builder: (context, userProvider, _) {
+    //       if (userProvider.user.token.isNotEmpty) {
+    //         if (userProvider.user.type == 'user') {
+    //           return const BottomBar();
+    //         } else {
+    //           return const AdminScreen();
+    //         }
+    //       } else {
+    //         return const AuthScreen();
+    //       }
+    //     },
+    //   ),
+    // );
+    
     );
   }
 }

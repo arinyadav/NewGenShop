@@ -24,7 +24,7 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) =>
-            const Scaffold(body: Center(child: Text('Sceen not exists!!'))),
+            const Scaffold(body: Center(child: Text('Screen not exists!!'))),
       );
   }
 }

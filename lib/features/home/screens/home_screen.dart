@@ -18,7 +18,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-   // final user = Provider.of<UserProvider>(context).user;
+    
+   final user = Provider.of<UserProvider>(context).user;
+
     return Scaffold(
        appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60), 
