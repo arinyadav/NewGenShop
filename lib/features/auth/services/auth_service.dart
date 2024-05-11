@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
+
   void signUpUser({
     required BuildContext context,
     required String email,
@@ -89,7 +90,7 @@ class AuthService {
   }
 
 // get user data
-  void getUserDAta(
+  void getUserData(
     BuildContext context,
   ) async {
     try {
@@ -107,9 +108,10 @@ class AuthService {
           'x-auth-token': token!
         },
       );
+
       var response = jsonDecode(tokenRes.body);
+
       if (response == true) {
-        //get user data
         http.Response userRes = await http.get(
           Uri.parse('$uri/'),
           headers: <String, String>{

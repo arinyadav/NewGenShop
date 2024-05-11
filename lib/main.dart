@@ -29,12 +29,6 @@ class _MyAppState extends State<MyApp> {
   final AuthService authService = AuthService();
 
   @override
-  void initState() {
-    super.initState();
-    authService.getUserDAta(context);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -50,32 +44,14 @@ class _MyAppState extends State<MyApp> {
             color: Colors.black,
           ),
         ),
+        useMaterial3: true, // can remove this line
       ),
-
-      //for routes
       onGenerateRoute: (settings) => generateRoute(settings),
-      //Main screen what we see
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == 'user'
               ? const BottomBar()
               : const AdminScreen()
           : const AuthScreen(),
-
-    //       home: Consumer<UserProvider>(
-    //     builder: (context, userProvider, _) {
-    //       if (userProvider.user.token.isNotEmpty) {
-    //         if (userProvider.user.type == 'user') {
-    //           return const BottomBar();
-    //         } else {
-    //           return const AdminScreen();
-    //         }
-    //       } else {
-    //         return const AuthScreen();
-    //       }
-    //     },
-    //   ),
-    // );
-    
     );
   }
 }
