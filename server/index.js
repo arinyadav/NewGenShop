@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 //IMPORT from other files
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 
 //INIT
 const PORT = process.env.PORT || 5000;
@@ -16,6 +17,7 @@ const DB = "mongodb+srv://yadavarinprashu:arin123@cluster0.96iewno.mongodb.net/?
 // CLIENT -> middlware -> SERVER -> CLIENT
 app.use(express.json()); //pases json payloads
 app.use(authRouter);
+app.use(adminRouter);
 
 //Connections
 mongoose.connect(DB).then(() => {
