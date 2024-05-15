@@ -4,19 +4,20 @@ String uri = 'http://192.168.29.104:5000';
 
 class GlobalVariables {
   // COLORS
-  static const appBarGradient = LinearGradient(
-    colors: [
-      Color.fromARGB(255, 29, 201, 192),
-      Color.fromARGB(255, 125, 221, 216),
-    ],
-    stops: [0.5, 1.0],
-  );
+static const appBarGradient = LinearGradient(
+  colors: [
+    Color.fromARGB(255, 112, 173, 71),
+    Color.fromARGB(255, 217, 228, 148),
+  ],
+  stops: [0.5, 1.0],
+);
 
-  static const secondaryColor = Color.fromRGBO(255, 153, 0, 1);
-  static const backgroundColor = Colors.white;
-  static const Color greyBackgroundCOlor = Color(0xffebecee);
-  static var selectedNavBarColor = Colors.cyan[800]!;
-  static const unselectedNavBarColor = Colors.black87;
+static const secondaryColor = Color.fromRGBO(250, 132, 27, 1);
+static const backgroundColor = Color.fromRGBO(245, 245, 245, 1);
+static const Color greyBackgroundCOlor = Color.fromRGBO(220, 220, 220, 1);
+static var selectedNavBarColor = Color.fromRGBO(112, 173, 71, 1);
+static const unselectedNavBarColor = Colors.black87;
+
 
   // STATIC IMAGES
   static const List<String> carouselImages = [

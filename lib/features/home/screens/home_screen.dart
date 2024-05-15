@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.all(Radius.circular(7),),
                         borderSide: BorderSide(color: Colors.black38,width: 1),
                       ),
-                      hintText: 'Search Amazon',
+                      hintText: 'Search Here',
                       hintStyle: const TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 17,
