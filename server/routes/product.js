@@ -14,7 +14,7 @@ productRouter.get("/api/products/", auth, async (req, res) => {
   }
 });
 
-// create a get request to search products and get them
+//get request to search products and get them
 // /api/products/search/i
 productRouter.get("/api/products/search/:name", auth, async (req, res) => {
   try {
@@ -28,7 +28,7 @@ productRouter.get("/api/products/search/:name", auth, async (req, res) => {
   }
 });
 
-// create a post request route to rate the product.
+//post request route to rate the product.
 productRouter.post("/api/rate-product", auth, async (req, res) => {
   try {
     const { id, rating } = req.body;

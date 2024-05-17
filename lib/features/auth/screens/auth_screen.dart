@@ -1,215 +1,215 @@
-import 'package:amazon/common/widgets/custom_button.dart';
-import 'package:amazon/common/widgets/custom_textfield.dart';
-import 'package:amazon/constants/global_variables.dart';
-import 'package:amazon/features/auth/services/auth_service.dart';
-import 'package:flutter/material.dart';
+  import 'package:amazon/common/widgets/custom_button.dart';
+  import 'package:amazon/common/widgets/custom_textfield.dart';
+  import 'package:amazon/constants/global_variables.dart';
+  import 'package:amazon/features/auth/services/auth_service.dart';
+  import 'package:flutter/material.dart';
 
-enum Auth {
-  signin,
-  signup,
-}
-
-class AuthScreen extends StatefulWidget {
-  static const String routeName = '/auth-screen';
-  const AuthScreen({super.key});
-
-  @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
-
-class _AuthScreenState extends State<AuthScreen> {
-  //This is the default value of auth
-  Auth _auth = Auth.signup;
-  final _signUpFormKey = GlobalKey<FormState>();
-  final _signInFormKey = GlobalKey<FormState>();
-  final AuthService authService = AuthService();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _nameController.dispose();
+  enum Auth {
+    signin,
+    signup,
   }
 
-  void signUpUser() {
-    authService.signUpUser(
+  class AuthScreen extends StatefulWidget {
+    static const String routeName = '/auth-screen';
+    const AuthScreen({super.key});
+
+    @override
+    State<AuthScreen> createState() => _AuthScreenState();
+  }
+
+  class _AuthScreenState extends State<AuthScreen> {
+    //This is the default value of auth
+    Auth _auth = Auth.signup;     
+    final _signUpFormKey = GlobalKey<FormState>();
+    final _signInFormKey = GlobalKey<FormState>();
+    final AuthService authService = AuthService();
+    final TextEditingController _emailController = TextEditingController();
+    final TextEditingController _passwordController = TextEditingController();
+    final TextEditingController _nameController = TextEditingController();
+
+    @override
+    void dispose() {
+      super.dispose();
+      _emailController.dispose();
+      _passwordController.dispose();
+      _nameController.dispose();
+    }
+
+    void signUpUser() {
+      authService.signUpUser(
+          context: context,
+          email: _emailController.text,
+          password: _passwordController.text,
+          name: _nameController.text);
+    }
+
+    void signInUser() {
+      authService.signInUser(
         context: context,
         email: _emailController.text,
         password: _passwordController.text,
-        name: _nameController.text);
-  }
+      );
+    }
 
-  void signInUser() {
-    authService.signInUser(
-      context: context,
-      email: _emailController.text,
-      password: _passwordController.text,
-    );
-  }
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        backgroundColor: GlobalVariables.greyBackgroundCOlor,
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Colors.blue, Colors.green],
+            ),
+          ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: GlobalVariables.greyBackgroundCOlor,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Colors.blue, Colors.green],
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                const Row(
+    children: [
+    Text(
+          textAlign: TextAlign.center,
+          'Welcome to NewGen Shopp!',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
-
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-               const Row(
-  children: [
-   Text(
-         textAlign: TextAlign.center,
-        'Welcome to NewGen Shopp!',
-        style: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
-    // Image.asset(
-    //   'assets/images/logo_shopping.png',
-    //   // Specify the width and height constraints for the image
-    //   width: 10, // Adjust the width as needed
-    //   height: 10, // Adjust the height as needed
-    // ),
-  ],
-),
-                ListTile(
-                  tileColor: _auth == Auth.signup
-                      ? GlobalVariables.backgroundColor
-                      : GlobalVariables.greyBackgroundCOlor,
-                  title: const Text(
-                    'Create Account',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  leading: Radio(
-                    activeColor: GlobalVariables.secondaryColor,
-                    value: Auth.signup,
-                    groupValue: _auth,
-                    onChanged: (Auth? val) {
-                      setState(() {
-                        _auth = val!;
-                      });
-                    },
-                  ),
-                ),
-                if (_auth == Auth.signup)
-                  Container(
-                    // controllers will reamin same they wotn't be change will have the same data
-                    padding: const EdgeInsets.all(8),
-                   // color: GlobalVariables.backgroundColor,
-                    child: Form(
-                      key: _signUpFormKey,
-                      child: Column(
-                        children: [
-                          CustomTextField(
-                            controller: _nameController,
-                            hintText: 'Name',
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          CustomTextField(
-                            controller: _emailController,
-                            hintText: 'Email',
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          CustomTextField(
-                            controller: _passwordController,
-                            hintText: 'Password',
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          CustomButton(
-                            text: 'SignUp',
-                            onTap: () {
-                              if (_signUpFormKey.currentState!.validate()) {
-                                signUpUser();
-                              }
-                            },
-                          ),
-                        ],
+      // Image.asset(
+      //   'assets/images/logo_shopping.png',
+      //   // Specify the width and height constraints for the image
+      //   width: 10, // Adjust the width as needed
+      //   height: 10, // Adjust the height as needed
+      // ),
+    ],
+  ),
+                  ListTile(
+                    tileColor: _auth == Auth.signup
+                        ? GlobalVariables.backgroundColor
+                        : GlobalVariables.greyBackgroundCOlor,
+                    title: const Text(
+                      'Create Account',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ListTile(
-                  tileColor: _auth == Auth.signin
-                      ? GlobalVariables.backgroundColor
-                      : GlobalVariables.greyBackgroundCOlor,
-                  title: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                    leading: Radio(
+                      activeColor: GlobalVariables.secondaryColor,
+                      value: Auth.signup,
+                      groupValue: _auth,
+                      onChanged: (Auth? val) {
+                        setState(() {
+                          _auth = val!;
+                        });
+                      },
                     ),
                   ),
-                  leading: Radio(
-                    activeColor: GlobalVariables.secondaryColor,
-                    value: Auth.signin,
-                    groupValue: _auth,
-                    onChanged: (Auth? val) {
-                      setState(() {
-                        _auth = val!;
-                      });
-                    },
-                  ),
-                ),
-                if (_auth == Auth.signin)
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                  //  color: GlobalVariables.backgroundColor,
-                    child: Form(
-                      key: _signInFormKey,
-                      child: Column(
-                        children: [
-                          CustomTextField(
-                            controller: _emailController,
-                            hintText: 'Email',
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                           CustomTextField(
-                            controller: _passwordController,
-                            hintText: 'Password',
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          CustomButton(
-                              text: 'SignIn',
+                  if (_auth == Auth.signup)
+                    Container(
+                      // controllers will reamin same they wotn't be change will have the same data
+                      padding: const EdgeInsets.all(8),
+                    // color: GlobalVariables.backgroundColor,
+                      child: Form(
+                        key: _signUpFormKey,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              controller: _nameController,
+                              hintText: 'Name',
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomTextField(
+                              controller: _emailController,
+                              hintText: 'Email',
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomTextField(
+                              controller: _passwordController,
+                              hintText: 'Password',
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomButton(
+                              text: 'SignUp',
                               onTap: () {
-                                if (_signInFormKey.currentState!.validate()) {
-                                  signInUser();
+                                if (_signUpFormKey.currentState!.validate()) {
+                                  signUpUser();
                                 }
-                              }),
-                        ],
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
+                  ListTile(
+                    tileColor: _auth == Auth.signin
+                        ? GlobalVariables.backgroundColor
+                        : GlobalVariables.greyBackgroundCOlor,
+                    title: const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    leading: Radio(
+                      activeColor: GlobalVariables.secondaryColor,
+                      value: Auth.signin,
+                      groupValue: _auth,
+                      onChanged: (Auth? val) {
+                        setState(() {
+                          _auth = val!;
+                        });
+                      },
+                    ),
                   ),
-              ],
+                  if (_auth == Auth.signin)
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                    //  color: GlobalVariables.backgroundColor,
+                      child: Form(
+                        key: _signInFormKey,
+                        child: Column(
+                          children: [
+                            CustomTextField(
+                              controller: _emailController,
+                              hintText: 'Email',
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomTextField(
+                              controller: _passwordController,
+                              hintText: 'Password',
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            CustomButton(
+                                text: 'SignIn',
+                                onTap: () {
+                                  if (_signInFormKey.currentState!.validate()) {
+                                    signInUser();
+                                  }
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
   }
-}
