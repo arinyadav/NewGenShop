@@ -1,6 +1,6 @@
 # NewGen Shop
 
-A flutter project which is a Shopping APP with admin panel 
+A flutter project which is a Shopping APP 
 
 # To run app (On Terminal):-
 
