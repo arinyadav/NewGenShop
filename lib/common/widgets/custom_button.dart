@@ -13,22 +13,39 @@ class CustomButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50), // Change button size
-        primary: color ?? Theme.of(context).primaryColor, // Use primary color if color is not provided
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20), // Change button shape
+   Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 50,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              color ?? Theme.of(context).primaryColor,
+              color?.withOpacity(0.7) ?? Theme.of(context).primaryColor.withOpacity(0.7),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8,
+              offset: Offset(2, 2),
+            ),
+          ],
         ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color == null ? Colors.white : Theme.of(context).primaryColor, // Use primary color for text
-          fontSize: 16, // Change text size
-          fontWeight: FontWeight.bold,
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );

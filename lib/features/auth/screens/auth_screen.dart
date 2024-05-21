@@ -60,34 +60,34 @@
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [Colors.blue, Colors.green],
+              colors: [Color.fromRGBO(169, 208, 142, 1), // Lighter green shade
+              Color.fromRGBO(255, 241, 189, 1),],
             ),
           ),
 
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                const Row(
-    children: [
-    Text(
-          textAlign: TextAlign.center,
-          'Welcome to NewGen Shopp!',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      // Image.asset(
-      //   'assets/images/logo_shopping.png',
-      //   // Specify the width and height constraints for the image
-      //   width: 10, // Adjust the width as needed
-      //   height: 10, // Adjust the height as needed
-      // ),
-    ],
-  ),
+           child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Column(
+                  children: [
+                    Image.asset(
+                      'assests/images/logo_shopping.png', // Replace with your image asset path
+                      height: 150,
+                    ),
+                    const SizedBox(height: 10),
+                    // const Text(
+                    //   'Welcome to NewGen Shopp!',
+                    //   textAlign: TextAlign.center,
+                    //   style: TextStyle(
+                    //     fontSize: 24,
+                    //     fontWeight: FontWeight.bold,
+                    //     color: Colors.white,
+                    //   ),
+                    // ),
+                  ],
+                ),
                   ListTile(
                     tileColor: _auth == Auth.signup
                         ? GlobalVariables.backgroundColor
@@ -118,24 +118,56 @@
                         key: _signUpFormKey,
                         child: Column(
                           children: [
-                            CustomTextField(
-                              controller: _nameController,
-                              hintText: 'Name',
-                            ),
+                            TextFormField(
+                              controller:_nameController,
+              decoration: const InputDecoration(
+                labelText: 'Name',
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your name';
+                }
+                return null;
+              },
+            ),
+
                             const SizedBox(
                               height: 5,
                             ),
-                            CustomTextField(
-                              controller: _emailController,
-                              hintText: 'Email',
-                            ),
+                             TextFormField(
+                                controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
+            ),
                             const SizedBox(
                               height: 5,
                             ),
-                            CustomTextField(
-                              controller: _passwordController,
-                              hintText: 'Password',
-                            ),
+                             TextFormField(
+                            controller: _passwordController,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
+            ),
                             const SizedBox(
                               height: 5,
                             ),
@@ -180,17 +212,40 @@
                         key: _signInFormKey,
                         child: Column(
                           children: [
-                            CustomTextField(
-                              controller: _emailController,
-                              hintText: 'Email',
-                            ),
+                              TextFormField(
+                                controller: _emailController,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your email';
+                }
+                return null;
+              },
+            ),
+
                             const SizedBox(
                               height: 5,
                             ),
-                            CustomTextField(
-                              controller: _passwordController,
-                              hintText: 'Password',
-                            ),
+                           TextFormField(
+                            controller: _passwordController,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                filled: true,
+                fillColor: Colors.white,
+              ),
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter your password';
+                }
+                return null;
+              },
+            ),
+
                             const SizedBox(
                               height: 5,
                             ),
