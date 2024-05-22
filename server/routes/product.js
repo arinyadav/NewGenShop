@@ -36,6 +36,7 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
 
     for (let i = 0; i < product.ratings.length; i++) {
       if (product.ratings[i].userId == req.user) {
+        // slice allow us to add or delete
         product.ratings.splice(i, 1);
         break;
       }

@@ -1,3 +1,7 @@
+import 'package:amazon/common/widgets/loader.dart';
+import 'package:amazon/features/home/services/home_services.dart';
+import 'package:amazon/features/product_details/screens/product_details_screen.dart';
+import 'package:amazon/models/product.dart';
 import 'package:flutter/material.dart';
 
 class DealOfDay extends StatefulWidget {
@@ -8,38 +12,38 @@ class DealOfDay extends StatefulWidget {
 }
 
 class _DealOfDayState extends State<DealOfDay> {
- // Product? product;
- // final HomeServices homeServices = HomeServices();
+ Product? product;
+ final HomeServices homeServices = HomeServices();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchDealOfDay();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    fetchDealOfDay();
+  }
 
-  // void fetchDealOfDay() async {
-  //   product = await homeServices.fetchDealOfDay(context: context);
-  //   setState(() {});
-  // }
+  void fetchDealOfDay() async {
+    product = await homeServices.fetchDealOfDay(context: context);
+    setState(() {});
+  }
 
-  // void navigateToDetailScreen() {
-  //   Navigator.pushNamed(
-  //     context,
-  //     ProductDetailScreen.routeName,
-  //     arguments: product,
-  //   );
-  // }
+  void navigateToDetailScreen() {
+    Navigator.pushNamed(
+      context,
+      ProductDetailScreen.routeName,
+      arguments: product,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // return product == null
-    //     ? const Loader()
-    //     : product!.name.isEmpty
-    //         ? const SizedBox()
-    //         : GestureDetector(
-    //             onTap: navigateToDetailScreen,
-    //             child:
-                return Column(
+    return product == null
+        ? const Loader()
+        : product!.name.isEmpty
+            ? const SizedBox()
+            : GestureDetector(
+                onTap: navigateToDetailScreen,
+              child:
+                 Column(
                   children: [
                     Container(
                       alignment: Alignment.topLeft,
@@ -77,32 +81,13 @@ class _DealOfDayState extends State<DealOfDay> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children:[
-                                Image.network(
+                        children:product!.images.map((e)=>     Image.network(
                                 'https://images.unsplash.com/photo-1712828502165-4079856c479c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
                                 fit: BoxFit.fitWidth,
                                 width: 100,
                                 height: 100,
-                              ),
-                               Image.network(
-                                'https://images.unsplash.com/photo-1712828502165-4079856c479c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
-                                fit: BoxFit.fitWidth,
-                                width: 100,
-                                height: 100,
-                              ),
-                                 Image.network(
-                                'https://images.unsplash.com/photo-1712828502165-4079856c479c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
-                                fit: BoxFit.fitWidth,
-                                width: 100,
-                                height: 100,
-                              ),
-                                 Image.network(
-                                'https://images.unsplash.com/photo-1712828502165-4079856c479c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHx8',
-                                fit: BoxFit.fitWidth,
-                                width: 100,
-                                height: 100,
-                              ),
-                        ],
+                              ),).toList(),
+                                          
                       ),
                     ),
                     Container(
@@ -118,6 +103,6 @@ class _DealOfDayState extends State<DealOfDay> {
                       ),
                     ),
                   ],
-              );
+            ),);
   }
 }
