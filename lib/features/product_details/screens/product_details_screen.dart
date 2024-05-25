@@ -226,7 +226,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: 'Add to Cart',
-                onTap: (){},
+                onTap: addToCart,
                 color:  Color.fromARGB(255, 217, 228, 148),
               ),
             ),
