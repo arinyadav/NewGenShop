@@ -1,3 +1,4 @@
+import 'package:amazon/features/cart/services/cart_services.dart';
 import 'package:amazon/features/product_details/services/product_details_services.dart';
 import 'package:amazon/models/product.dart';
 import 'package:amazon/providers/user_provider.dart';
