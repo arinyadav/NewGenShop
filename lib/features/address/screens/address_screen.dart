@@ -1,6 +1,7 @@
 import 'package:amazon/common/widgets/custom_textfield.dart';
 import 'package:amazon/constants/global_variables.dart';
 import 'package:amazon/constants/utils.dart';
+import 'package:amazon/features/address/services/address_services.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
@@ -112,7 +113,7 @@ class _AddressScreenState extends State<AddressScreen> {
           .loadString('assets/gpay.json'),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
+          return Center(child : CircularProgressIndicator());
         }
         final String paymentConfigurationJson = snapshot.data!;
         final paymentConfiguration = PaymentConfiguration.fromJsonString(paymentConfigurationJson);

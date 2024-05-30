@@ -1,5 +1,9 @@
+import 'package:amazon/common/widgets/loader.dart';
 import 'package:amazon/constants/global_variables.dart';
+import 'package:amazon/features/account/services/account_services.dart';
 import 'package:amazon/features/account/widgets/single_product.dart';
+import 'package:amazon/features/order_details/screens/order_details.dart';
+import 'package:amazon/models/order.dart';
 import 'package:flutter/material.dart';
 
 class Orders extends StatefulWidget {
@@ -10,16 +14,25 @@ class Orders extends StatefulWidget {
 }
 
 class _OrdersState extends State<Orders> {
-  List<String> list = [
-    'https://images.unsplash.com/photo-1707343844436-37580f155ed2?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
-    'https://images.unsplash.com/photo-1707343844436-37580f155ed2?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
-    'https://images.unsplash.com/photo-1707343844436-37580f155ed2?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
-    'https://images.unsplash.com/photo-1707343844436-37580f155ed2?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8',
-  ];
+  List<Order>? orders;
+  final AccountServices accountServices = AccountServices();
 
   @override
-  Widget build(BuildContext context) { 
-          return Column(
+  void initState() {
+    super.initState();
+    fetchOrders();
+  }
+
+  void fetchOrders() async {
+    orders = await accountServices.fetchMyOrders(context: context);
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return orders == null
+        ? const Loader()
+        : Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,7 +62,6 @@ class _OrdersState extends State<Orders> {
                   ),
                 ],
               ),
-
               // display orders
               Container(
                 height: 170,
@@ -60,10 +72,22 @@ class _OrdersState extends State<Orders> {
                 ),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: list.length, //orders!.length,
+                  itemCount: orders!.length,
                   itemBuilder: (context, index) {
-                    return SingleProduct(image: list[index],);
-                  },),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          OrderDetailScreen.routeName,
+                          arguments: orders![index],
+                        );
+                      },
+                      child: SingleProduct(
+                        image: orders![index].products[0].images[0],
+                      ),
+                    );
+                  },
+                ),
               ),
             ],
           );
