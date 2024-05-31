@@ -21,7 +21,7 @@ app.use(express.json()); //pases json payloads
 app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
-app.unse(userRouter);
+app.use(userRouter);
 
 //Connections
 mongoose.connect(DB).then(() => {

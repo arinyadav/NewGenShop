@@ -5,6 +5,7 @@ import 'package:amazon/features/search/screens/search_screen.dart';
 import 'package:amazon/models/order.dart';
 import 'package:amazon/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class OrderDetailScreen extends StatefulWidget {
