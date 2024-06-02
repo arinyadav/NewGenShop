@@ -17,5 +17,4 @@ A flutter project which is a Shopping APP
 
 <img src="https://github.com/arinyadav/NewGenShop/assets/98683112/4e6e981b-5f4b-45e5-8c3a-be34926cb20d" width="30%" height="30%">
 
-<img src="https://github.com/arinyadav/NewGenShop/assets/98683112/815759ee-effd-4e24-a687-59c7976341f8" width="30%" height="30%">
 
